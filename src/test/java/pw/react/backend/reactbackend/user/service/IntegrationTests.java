@@ -12,6 +12,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import pw.react.backend.reactbackend.user.User;
 import pw.react.backend.reactbackend.user.UserRepository;
@@ -24,6 +25,7 @@ import static org.mockito.Mockito.spy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("it")
 public class IntegrationTests {
 
     private UserService service;
@@ -45,8 +47,8 @@ public class IntegrationTests {
         service = spy(new UserService(repository));
         myrest.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         header = new HttpHeaders();
-        header.add("admin", "password");
         header.setContentType(MediaType.APPLICATION_JSON);
+        header.add("admin", "password");
         User a = new User("a","Ada", "Klimczak",LocalDate.of(1998,1,20));
         User w = new User("w","Wiola", "Kucharska",  LocalDate.of(2000,3,4));
         repository.save(a);
