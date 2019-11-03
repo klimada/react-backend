@@ -31,8 +31,13 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable String userId) {
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok().body(userRepository.findById(userId).orElseGet(User::new));
+    }
+
+    @GetMapping(path = "/login/{login}")
+    public ResponseEntity<List<User>> getUserByLogin(@PathVariable String login) {
+        return ResponseEntity.ok().body(userRepository.findAllByLogin(login));
     }
 
     @PutMapping(path = "")

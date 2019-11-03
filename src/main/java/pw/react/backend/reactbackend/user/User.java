@@ -21,8 +21,14 @@ public class User {
 
     @Column(name = "BirthDate",nullable = false)
     private LocalDate birthDate;
-
-
+    public User(){}
+    public User(String l,String fn, String ln, LocalDate dob)
+    {
+        this.login = l;
+        this.firstName = fn;
+        this.lastName = ln;
+        this.birthDate = dob;
+    }
     public String getLogin() {
         return login;
     }
